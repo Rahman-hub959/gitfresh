@@ -55,9 +55,7 @@ export default function AboutSection({
         <div className={`mt-8 sm:mt-10 max-w-xl mx-auto flex items-center justify-center gap-4 p-5 rounded-2xl border backdrop-blur-xl shadow-md transition-all ${
           isDark ? 'bg-slate-900/60 border-amber-500/20' : 'bg-white border-amber-500/25 shadow-sm'
         }`}>
-          <div className={`p-1.5 rounded-xl border w-12 h-12 flex items-center justify-center flex-shrink-0 ${
-            isDark ? 'bg-amber-500/10 border-amber-500/30 text-amber-400' : 'bg-amber-50 border-amber-400/40 text-amber-800'
-          }`}>
+          <div className="p-1 rounded-xl border-2 border-amber-400/80 w-12 h-12 flex items-center justify-center flex-shrink-0 bg-white shadow-sm overflow-hidden">
             <img 
               src="/assets/svl-advocate-seal.png" 
               alt="Advocate High Court Insignia" 

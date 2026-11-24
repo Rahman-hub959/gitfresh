@@ -54,11 +54,7 @@ export default function Navbar({ onOpenUrgent, contactData, isDark = true }) {
           
           {/* Logo & Identity (Fixed no-wrap to prevent awkward 2-line break) */}
           <a href="#" className="flex items-center gap-3.5 group text-left flex-shrink-0">
-            <div className={`w-12 h-12 rounded-xl p-1 flex items-center justify-center transition-all duration-300 shadow-md flex-shrink-0 ${
-              isDark 
-                ? 'bg-slate-900 border border-amber-500/40 text-amber-400 group-hover:border-amber-400 shadow-amber-950/40' 
-                : 'bg-white border border-amber-500/30 text-amber-800 shadow-sm group-hover:border-amber-500'
-            }`}>
+            <div className="w-12 h-12 rounded-xl p-1 flex items-center justify-center transition-all duration-300 shadow-md flex-shrink-0 bg-white border-2 border-amber-400/80 group-hover:border-amber-300 shadow-amber-950/20">
               <img 
                 src="/assets/svl-advocate-seal.png" 
                 alt="Advocate Simhadri Vasantha Lakshmi Logo" 

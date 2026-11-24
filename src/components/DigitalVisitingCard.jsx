@@ -128,14 +128,16 @@ END:VCARD`;
 
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center relative z-10">
           
-          {/* Left Column: Authentic 3D Gold Insignia Logo */}
+          {/* Left Column: Official 3D Gold Insignia Logo with Pure White Background */}
           <div className="md:col-span-5 flex flex-col items-center md:items-start text-center md:text-left border-b md:border-b-0 md:border-r pb-5 md:pb-0 md:pr-6 border-amber-500/20">
-            <div className="relative mb-2 flex items-center justify-center w-full">
-              <img 
-                src="/assets/svl-advocate-logo.png" 
-                alt="Advocate Simhadri Vasantha Lakshmi Logo" 
-                className="w-48 sm:w-52 h-auto object-contain filter drop-shadow-[0_4px_16px_rgba(217,119,6,0.35)] transition-transform duration-300 group-hover:scale-105"
-              />
+            <div className="relative mb-3 flex items-center justify-center w-full">
+              <div className="p-2 sm:p-2.5 rounded-2xl bg-white border-2 border-amber-400/80 shadow-lg shadow-amber-950/20 overflow-hidden">
+                <img 
+                  src="/assets/svl-advocate-logo.jpg" 
+                  alt="Advocate Simhadri Vasantha Lakshmi Logo" 
+                  className="w-44 sm:w-48 h-auto object-contain transition-transform duration-300 group-hover:scale-105"
+                />
+              </div>
             </div>
 
             <p className={`font-cinzel text-xs font-bold tracking-widest uppercase mt-1 ${
