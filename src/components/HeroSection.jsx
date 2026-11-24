@@ -18,7 +18,7 @@ export default function HeroSection({ onOpenUrgent, isDark }) {
   };
 
   return (
-    <section className={`relative overflow-hidden pt-12 sm:pt-16 pb-24 sm:pb-32 lg:py-28 border-b transition-colors duration-300 ${
+    <section className={`relative overflow-hidden pt-8 sm:pt-12 md:pt-16 pb-8 sm:pb-12 md:pb-16 lg:py-20 border-b transition-colors duration-300 ${
       isDark 
         ? 'bg-radial-gradient-justice border-amber-500/20' 
         : 'bg-gradient-to-b from-[#faf8f5] via-[#f2f6fa] to-[#faf8f5] border-amber-500/20'

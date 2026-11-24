@@ -30,7 +30,7 @@ export default function PracticeAreasSection({ onSelectMatter, isDark }) {
     : PRACTICE_AREAS.filter(area => area.category.toLowerCase() === activeCategory.toLowerCase());
 
   return (
-    <section id="practice-areas" className={`py-28 lg:py-36 relative border-b transition-colors duration-300 overflow-hidden ${
+    <section id="practice-areas" className={`py-10 sm:py-14 md:py-18 lg:py-20 relative border-b transition-colors duration-300 overflow-hidden ${
       isDark ? 'bg-[#060b17] border-amber-500/20' : 'bg-gradient-to-b from-[#faf8f5] via-[#f0f4f9] to-[#faf8f5] border-amber-500/20'
     }`}>
       {/* Background decorations */}
@@ -41,7 +41,7 @@ export default function PracticeAreasSection({ onSelectMatter, isDark }) {
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10 relative z-10">
         
         {/* Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
+        <div className="text-center max-w-3xl mx-auto mb-8 sm:mb-12 space-y-3 sm:space-y-4">
           <div className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-display font-semibold tracking-wider uppercase border shadow-sm ${
             isDark ? 'bg-amber-500/10 border-amber-500/30 text-amber-300' : 'bg-white border-amber-500/30 text-amber-800'
           }`}>
@@ -63,7 +63,7 @@ export default function PracticeAreasSection({ onSelectMatter, isDark }) {
         </div>
 
         {/* Category Filters */}
-        <div className="flex flex-wrap items-center justify-center gap-2.5 mb-14">
+        <div className="flex flex-wrap items-center justify-center gap-2.5 mb-8 sm:mb-10">
           {categories.map((cat) => {
             const isActive = activeCategory === cat;
             return (
@@ -172,7 +172,7 @@ export default function PracticeAreasSection({ onSelectMatter, isDark }) {
         </div>
 
         {/* Mandatory Bar Engagement Notice */}
-        <div className={`mt-14 max-w-3xl mx-auto text-center p-4 rounded-xl border ${
+        <div className={`mt-8 sm:mt-10 max-w-3xl mx-auto text-center p-4 rounded-xl border ${
           isDark ? 'bg-slate-900/60 border-amber-500/20' : 'bg-[#fbf7f3] border-[#953a2e]/20 shadow-sm'
         }`}>
           <p className={`font-garamond italic font-bold text-sm sm:text-base ${isDark ? 'text-amber-200' : 'text-[#1a0f0c]'}`}>

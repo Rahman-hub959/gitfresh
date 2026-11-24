@@ -17,10 +17,10 @@ export default function Footer({ isDark }) {
         : 'bg-[#1a0f0c] border-[#953a2e]/30 text-[#e5ded8]'
     }`}>
       {/* Top Banner with Quote */}
-      <div className={`border-b py-12 px-6 sm:px-8 text-center ${
+      <div className={`border-b py-8 sm:py-10 px-4 sm:px-8 text-center ${
         isDark ? 'border-slate-900 bg-[#040812]' : 'border-[#3d1812] bg-[#241511]'
       }`}>
-        <div className="max-w-4xl mx-auto space-y-3">
+        <div className="max-w-4xl mx-auto space-y-2 sm:space-y-3">
           <p className="font-garamond italic font-bold text-xl sm:text-2xl lg:text-3xl text-amber-100 leading-relaxed tracking-wide drop-shadow-sm">
             “Let knowledge guide the argument, let integrity define the profession, and let justice remain the ultimate purpose.”
           </p>
@@ -32,7 +32,7 @@ export default function Footer({ isDark }) {
         </div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 sm:py-20">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10 sm:py-14">
         <div className="grid grid-cols-1 md:grid-cols-4 gap-10 sm:gap-12 mb-14">
           
           {/* Col 1: Identity */}

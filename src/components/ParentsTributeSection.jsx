@@ -10,7 +10,7 @@ export default function ParentsTributeSection({ isDark }) {
   return (
     <section 
       id="parents-tribute" 
-      className={`relative py-28 lg:py-36 overflow-hidden transition-colors duration-500 border-b ${
+      className={`relative py-10 sm:py-14 md:py-18 lg:py-20 overflow-hidden transition-colors duration-500 border-b ${
         isDark
           ? 'bg-gradient-to-b from-[#050914] via-[#091224] to-[#050914] border-amber-500/20 text-slate-100'
           : 'bg-gradient-to-b from-[#faf8f5] via-[#eef4f9] to-[#faf8f5] border-amber-500/20 text-[#0c0f17]'
@@ -69,7 +69,7 @@ export default function ParentsTributeSection({ isDark }) {
       <div className="max-w-[1320px] mx-auto px-4 sm:px-6 lg:px-10 relative z-10">
         
         {/* Memorial Header Pill with Glassmorphism */}
-        <div className="text-center mb-14 space-y-4">
+        <div className="text-center mb-8 sm:mb-12 space-y-3 sm:space-y-4">
           <div className={`inline-flex items-center gap-2.5 px-5 py-2.5 rounded-full text-xs font-display font-semibold tracking-widest uppercase shadow-md backdrop-blur-xl border ${
             isDark 
               ? 'bg-amber-950/40 border-amber-500/40 text-amber-300 shadow-amber-950/30' 
@@ -174,7 +174,7 @@ export default function ParentsTributeSection({ isDark }) {
 
           {/* VIEW 1: TOGETHER IN GRACE (New High-Resolution Couple Photo in Luxury Glass Frame) */}
           {viewMode === 'together' && (
-            <div className="max-w-3xl mx-auto mb-14 text-center animate-fade-in">
+            <div className="max-w-3xl mx-auto mb-8 sm:mb-12 text-center animate-fade-in">
               {/* Luxury Glass Frame with Gold Trim */}
               <div 
                 onClick={() => setSelectedPhoto({ 
@@ -340,7 +340,7 @@ export default function ParentsTributeSection({ isDark }) {
           )}
 
           {/* Glassmorphic Special Quotation Banner */}
-          <div className={`max-w-3xl mx-auto my-14 sm:my-16 p-8 sm:p-12 rounded-3xl border text-center relative overflow-hidden backdrop-blur-2xl shadow-xl transition-all ${
+          <div className={`max-w-3xl mx-auto my-8 sm:my-12 p-6 sm:p-10 rounded-3xl border text-center relative overflow-hidden backdrop-blur-2xl shadow-xl transition-all ${
             isDark
               ? 'bg-amber-950/20 border-amber-500/35 shadow-amber-950/40'
               : 'bg-white/80 border-amber-400/50 shadow-xl shadow-amber-950/5'
@@ -375,7 +375,7 @@ export default function ParentsTributeSection({ isDark }) {
           </div>
 
           {/* Sacred Daughter's Pledge & Dedication with Frosted Divider */}
-          <div className={`mt-16 pt-10 border-t max-w-2xl mx-auto text-center space-y-5 ${
+          <div className={`mt-10 pt-8 border-t max-w-2xl mx-auto text-center space-y-4 ${
             isDark ? 'border-amber-500/20' : 'border-amber-600/20'
           }`}>
             <p className={`font-garamond italic font-bold text-xl sm:text-2xl md:text-3xl tracking-wide leading-snug ${

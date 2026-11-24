@@ -8,7 +8,7 @@ export default function PhilosophySection({ isDark }) {
   const icons = [Compass, BookCheck, ShieldAlert, Landmark];
 
   return (
-    <section id="philosophy" className={`py-28 lg:py-36 relative border-b transition-colors duration-300 overflow-hidden ${
+    <section id="philosophy" className={`py-10 sm:py-14 md:py-18 lg:py-20 relative border-b transition-colors duration-300 overflow-hidden ${
       isDark ? 'bg-slate-950 border-amber-500/20' : 'bg-gradient-to-b from-[#faf8f5] via-[#f0f4f9] to-[#faf8f5] border-amber-500/20'
     }`}>
       {/* Background radial gradient */}
@@ -19,7 +19,7 @@ export default function PhilosophySection({ isDark }) {
       <div className="max-w-[1440px] mx-auto px-4 sm:px-6 lg:px-10 relative z-10">
         
         {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-16 space-y-4">
+        <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-14 space-y-3 sm:space-y-4">
           <div className={`inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-xs font-display font-semibold tracking-wider uppercase border shadow-sm ${
             isDark ? 'bg-amber-500/10 border-amber-500/30 text-amber-300' : 'bg-white border-amber-500/30 text-amber-800'
           }`}>
