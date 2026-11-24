@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { 
   MapPin, Phone, Mail, Clock, Send, CheckCircle2, 
-  MessageSquare, Scale 
+  MessageSquare, Scale, Loader2
 } from 'lucide-react';
 import { ADVOCATE_INFO, PRACTICE_AREAS } from '../data/legalContent';
 import DigitalVisitingCard from './DigitalVisitingCard';
@@ -20,6 +20,8 @@ export default function ContactSection({ profileData, preselectedMatter, isDark 
   });
 
   const [submitted, setSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [lastSubmission, setLastSubmission] = useState(null);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -29,8 +31,76 @@ export default function ContactSection({ profileData, preselectedMatter, isDark 
     }));
   };
 
-  const handleSubmit = (e) => {
+  const getWhatsAppMessage = (data = formData) => {
+    return encodeURIComponent(
+      `⚖️ *LEGAL CONSULTATION REQUEST*\n` +
+      `Advocate Simhadri Vasantha Lakshmi Chambers\n` +
+      `High Court of Telangana & Andhra Pradesh\n` +
+      `-----------------------------------------\n` +
+      `• *Client Name:* ${data.fullName}\n` +
+      `• *Phone / Mobile:* ${data.phone}\n` +
+      `• *Email:* ${data.email || 'Not provided'}\n` +
+      `• *Practice Area:* ${data.practiceArea}\n` +
+      `• *Court Jurisdiction:* ${data.jurisdiction}\n` +
+      `• *Urgency:* ${data.urgency}\n` +
+      `• *Consultation Mode:* ${data.consultationMode}\n` +
+      (data.summary ? `• *Brief Summary:* ${data.summary}\n` : '') +
+      `-----------------------------------------\n` +
+      `Sent via Advocate Portfolio Website`
+    );
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsSubmitting(true);
+
+    const submissionTime = new Date().toLocaleString('en-IN', { 
+      timeZone: 'Asia/Kolkata', 
+      dateStyle: 'medium', 
+      timeStyle: 'short' 
+    });
+
+    const payload = {
+      "Client Name": formData.fullName,
+      "Phone Number": formData.phone,
+      "Email Address": formData.email || 'Not provided',
+      "Practice Area": formData.practiceArea,
+      "Court Jurisdiction": formData.jurisdiction,
+      "Urgency Level": formData.urgency,
+      "Preferred Mode": formData.consultationMode,
+      "Summary of Facts": formData.summary || 'None provided',
+      "Submission Time": submissionTime,
+      "_subject": `New Legal Consultation: ${formData.fullName} - ${formData.practiceArea}`,
+      "_cc": "vasanthahr06@gmail.com",
+      "_template": "table",
+      "_captcha": "false"
+    };
+
+    // 1. Save to local browser storage backup
+    try {
+      const existing = JSON.parse(localStorage.getItem('advocate_consultations') || '[]');
+      existing.unshift({ ...payload, timestamp: Date.now() });
+      localStorage.setItem('advocate_consultations', JSON.stringify(existing.slice(0, 50)));
+    } catch {
+      // LocalStorage errors ignored safely
+    }
+
+    // 2. Dispatch via FormSubmit AJAX endpoint to legalsource.24@gmail.com
+    try {
+      await fetch('https://formsubmit.co/ajax/legalsource.24@gmail.com', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(payload)
+      });
+    } catch (err) {
+      console.warn('Form submission network notification fallback:', err);
+    }
+
+    setLastSubmission({ ...formData, submissionTime });
+    setIsSubmitting(false);
     setSubmitted(true);
   };
 
@@ -38,7 +108,14 @@ export default function ContactSection({ profileData, preselectedMatter, isDark 
     const text = encodeURIComponent(
       `Namaste Advocate Simhadri Vasantha Lakshmi,\nI am contacting your chambers regarding a legal matter in ${formData.practiceArea || 'High Court'}. Please advise on an appointment for legal consultation.`
     );
-    const cleanPhone = (profileData.phone || ADVOCATE_INFO.contact.phone).replace(/[^0-9]/g, '');
+    const cleanPhone = (profileData?.phone || ADVOCATE_INFO.contact.phone).replace(/[^0-9]/g, '');
+    window.open(`https://wa.me/${cleanPhone}?text=${text}`, '_blank');
+  };
+
+  const handleDirectWhatsAppSubmission = () => {
+    const dataToUse = lastSubmission || formData;
+    const cleanPhone = (profileData?.phone || ADVOCATE_INFO.contact.phone).replace(/[^0-9]/g, '');
+    const text = getWhatsAppMessage(dataToUse);
     window.open(`https://wa.me/${cleanPhone}?text=${text}`, '_blank');
   };
 
@@ -257,30 +334,117 @@ export default function ContactSection({ profileData, preselectedMatter, isDark 
             }`}>
               
               {submitted ? (
-                <div className="py-16 px-4 text-center space-y-5 animate-fade-in">
-                  <div className={`w-16 h-16 rounded-full border-2 flex items-center justify-center mx-auto ${
-                    isDark ? 'bg-emerald-500/20 border-emerald-500/40 text-emerald-400' : 'bg-emerald-50 border-emerald-500 text-emerald-600'
+                <div className="py-8 sm:py-10 px-2 sm:px-4 text-center space-y-6 animate-fade-in">
+                  <div className={`w-16 h-16 rounded-full border-2 flex items-center justify-center mx-auto shadow-lg ${
+                    isDark ? 'bg-emerald-500/20 border-emerald-500/50 text-emerald-400 shadow-emerald-950/40' : 'bg-emerald-50 border-emerald-500 text-emerald-600 shadow-emerald-100'
                   }`}>
                     <CheckCircle2 className="w-8 h-8" />
                   </div>
-                  <h3 className={`font-display text-2xl font-bold ${
-                    isDark ? 'text-slate-100' : 'text-[#1a0f0c]'
+
+                  <div className="space-y-2">
+                    <span className={`text-[10px] font-display font-bold uppercase tracking-widest px-3 py-1 rounded-full border ${
+                      isDark ? 'bg-emerald-500/10 text-emerald-300 border-emerald-500/30' : 'bg-emerald-50 text-emerald-800 border-emerald-300'
+                    }`}>
+                      Inquiry Dispatched Successfully
+                    </span>
+                    <h3 className={`font-display text-2xl sm:text-3xl font-bold ${
+                      isDark ? 'text-slate-100' : 'text-[#1a0f0c]'
+                    }`}>
+                      Registered with Chambers
+                    </h3>
+                    <p className={`text-xs sm:text-sm font-sans max-w-lg mx-auto leading-relaxed ${
+                      isDark ? 'text-slate-300' : 'text-[#64534f]'
+                    }`}>
+                      Thank you, <strong className={isDark ? 'text-amber-300' : 'text-amber-800'}>{lastSubmission?.fullName || formData.fullName}</strong>. Your consultation details have been recorded and an email notification has been dispatched to <strong>legalsource.24@gmail.com</strong>.
+                    </p>
+                  </div>
+
+                  {/* Option C: Instant WhatsApp Forward Card */}
+                  <div className={`p-5 rounded-2xl border text-left space-y-3.5 max-w-lg mx-auto ${
+                    isDark ? 'bg-slate-950/80 border-emerald-500/35 shadow-xl' : 'bg-white border-emerald-400/40 shadow-sm'
                   }`}>
-                    Inquiry Received
-                  </h3>
-                  <p className={`text-sm font-sans max-w-md mx-auto leading-relaxed ${
-                    isDark ? 'text-slate-300' : 'text-[#64534f]'
+                    <div className="flex items-center gap-2">
+                      <MessageSquare className="w-4 h-4 text-emerald-500" />
+                      <span className={`text-xs font-display font-bold uppercase tracking-wider ${
+                        isDark ? 'text-emerald-300' : 'text-emerald-800'
+                      }`}>
+                        Instant WhatsApp Notification
+                      </span>
+                    </div>
+                    <p className={`text-xs font-sans leading-relaxed ${
+                      isDark ? 'text-slate-300' : 'text-slate-600'
+                    }`}>
+                      For urgent court matters or immediate scheduling, tap below to forward your complete case brief directly to Advocate Simhadri Vasantha Lakshmi's WhatsApp.
+                    </p>
+                    <button
+                      type="button"
+                      onClick={handleDirectWhatsAppSubmission}
+                      className="w-full py-3.5 px-5 rounded-xl bg-gradient-to-r from-emerald-600 via-emerald-500 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-display font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-lg shadow-emerald-950/30 transition-all active:scale-95 cursor-pointer"
+                    >
+                      <MessageSquare className="w-4 h-4" />
+                      <span>Forward Brief to WhatsApp (+91 80191 89343)</span>
+                    </button>
+                  </div>
+
+                  {/* Summary of Submitted Details */}
+                  <div className={`p-4 sm:p-5 rounded-2xl border text-left text-xs space-y-2 max-w-lg mx-auto ${
+                    isDark ? 'bg-slate-950/50 border-slate-800 text-slate-300' : 'bg-[#faf6f2] border-amber-900/10 text-slate-700'
                   }`}>
-                    Thank you, <strong>{formData.fullName}</strong>. Your consultation request regarding <strong>{formData.practiceArea}</strong> has been noted. Chambers will review the information and get in touch to coordinate the consultation slot.
-                  </p>
-                  <button
-                    onClick={() => setSubmitted(false)}
-                    className={`mt-6 px-7 py-3 rounded-xl text-xs font-display font-semibold ${
-                      isDark ? 'bg-slate-800 hover:bg-slate-700 text-amber-300' : 'bg-[#953a2e] text-white hover:bg-[#921e0f]'
-                    }`}
-                  >
-                    Submit Another Inquiry
-                  </button>
+                    <div className="flex items-center justify-between pb-2 border-b border-dashed border-slate-700/40">
+                      <span className="font-display font-semibold uppercase tracking-wider text-[10px] text-amber-500">
+                        Consultation Brief Record
+                      </span>
+                      <span className="font-mono text-[10px] text-slate-400">{lastSubmission?.submissionTime}</span>
+                    </div>
+                    <div className="grid grid-cols-2 gap-2.5 pt-1 text-[11px]">
+                      <div>
+                        <span className="text-slate-500 block text-[10px] uppercase">Client Name</span>
+                        <span className="font-medium text-slate-200">{lastSubmission?.fullName}</span>
+                      </div>
+                      <div>
+                        <span className="text-slate-500 block text-[10px] uppercase">Phone / Mobile</span>
+                        <span className="font-medium text-slate-200">{lastSubmission?.phone}</span>
+                      </div>
+                      <div>
+                        <span className="text-slate-500 block text-[10px] uppercase">Area of Law</span>
+                        <span className="font-medium text-slate-200">{lastSubmission?.practiceArea}</span>
+                      </div>
+                      <div>
+                        <span className="text-slate-500 block text-[10px] uppercase">Jurisdiction</span>
+                        <span className="font-medium text-slate-200">{lastSubmission?.jurisdiction}</span>
+                      </div>
+                    </div>
+                    {lastSubmission?.summary && (
+                      <div className="pt-2 text-[11px] border-t border-slate-800/60">
+                        <span className="text-slate-500 block text-[10px] uppercase">Matter Summary</span>
+                        <p className="italic text-slate-300 mt-0.5 line-clamp-3">"{lastSubmission.summary}"</p>
+                      </div>
+                    )}
+                  </div>
+
+                  <div className="pt-2">
+                    <button
+                      onClick={() => {
+                        setFormData({
+                          fullName: '',
+                          phone: '',
+                          email: '',
+                          practiceArea: preselectedMatter || 'Property & Civil Law',
+                          jurisdiction: 'High Court of Telangana (Hyderabad)',
+                          urgency: 'Standard',
+                          consultationMode: 'In-person Chambers',
+                          summary: '',
+                          agreedBCI: true
+                        });
+                        setSubmitted(false);
+                      }}
+                      className={`px-6 py-2.5 rounded-xl text-xs font-display font-semibold transition-all cursor-pointer ${
+                        isDark ? 'bg-slate-800 hover:bg-slate-700 text-amber-300' : 'bg-slate-200 text-slate-800 hover:bg-slate-300'
+                      }`}
+                    >
+                      Submit Another Inquiry
+                    </button>
+                  </div>
                 </div>
               ) : (
                 <form onSubmit={handleSubmit} className="space-y-5">
@@ -501,14 +665,26 @@ export default function ContactSection({ profileData, preselectedMatter, isDark 
                   <div className="pt-3">
                     <button
                       type="submit"
-                      className={`w-full py-4 px-6 rounded-xl font-display font-bold text-xs tracking-wider uppercase transition-all duration-200 active:scale-95 flex items-center justify-center gap-2 shadow-xl ${
+                      disabled={isSubmitting}
+                      className={`w-full py-4 px-6 rounded-xl font-display font-bold text-xs tracking-wider uppercase transition-all duration-200 active:scale-95 flex items-center justify-center gap-2 shadow-xl cursor-pointer ${
+                        isSubmitting ? 'opacity-80 cursor-wait' : ''
+                      } ${
                         isDark
                           ? 'bg-gradient-to-r from-amber-500 via-amber-400 to-amber-600 hover:from-amber-400 hover:to-amber-500 text-slate-950 shadow-amber-500/25'
                           : 'bg-[#953a2e] hover:bg-[#921e0f] text-white shadow-[#953a2e]/25'
                       }`}
                     >
-                      <Send className="w-4 h-4" />
-                      <span>Submit Legal Consultation Request</span>
+                      {isSubmitting ? (
+                        <>
+                          <Loader2 className="w-4 h-4 animate-spin" />
+                          <span>Dispatching Request to Chambers...</span>
+                        </>
+                      ) : (
+                        <>
+                          <Send className="w-4 h-4" />
+                          <span>Submit Legal Consultation Request</span>
+                        </>
+                      )}
                     </button>
                   </div>
                 </form>
