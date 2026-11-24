@@ -37,11 +37,15 @@ export default function Footer({ isDark }) {
           
           {/* Col 1: Identity */}
           <div className="space-y-3 md:col-span-2 text-left">
-            <div className={`flex items-center gap-2.5 ${isDark ? 'text-amber-400' : 'text-[#dba89f]'}`}>
-              <div className={`w-8 h-8 rounded-lg border flex items-center justify-center ${
-                isDark ? 'bg-amber-500/10 border-amber-500/30' : 'bg-[#3d1812] border-[#953a2e]/40'
+            <div className={`flex items-center gap-3 ${isDark ? 'text-amber-400' : 'text-[#dba89f]'}`}>
+              <div className={`w-9 h-9 rounded-xl border flex items-center justify-center p-0.5 overflow-hidden shadow-sm ${
+                isDark ? 'bg-slate-900 border-amber-500/30 shadow-amber-950/30' : 'bg-[#3d1812] border-[#953a2e]/40'
               }`}>
-                <Scale className="w-4 h-4" />
+                <img 
+                  src="/assets/svl-advocate-seal.png" 
+                  alt="Simhadri Vasantha Lakshmi Logo" 
+                  className="w-full h-full object-contain" 
+                />
               </div>
               <span className="font-display text-base font-bold text-white tracking-wider">
                 SIMHADRI VASANTHA LAKSHMI

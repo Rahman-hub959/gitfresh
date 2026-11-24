@@ -128,49 +128,17 @@ END:VCARD`;
 
         <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center relative z-10">
           
-          {/* Left Column: Authentic Scales of Justice Logo with Speed Lines */}
+          {/* Left Column: Authentic 3D Gold Insignia Logo */}
           <div className="md:col-span-5 flex flex-col items-center md:items-start text-center md:text-left border-b md:border-b-0 md:border-r pb-5 md:pb-0 md:pr-6 border-amber-500/20">
-            <div className="relative mb-3">
-              {/* Custom SVG Scales of Justice with Horizontal Accent Lines from visiting card */}
-              <svg 
-                viewBox="0 0 160 130" 
-                className={`w-32 h-28 sm:w-36 sm:h-32 transition-transform duration-300 group-hover:scale-105 ${
-                  isExec ? 'text-amber-400' : 'text-[#8c671a]'
-                }`}
-                fill="currentColor"
-              >
-                {/* Central Finial & Beam */}
-                <path d="M 80 10 L 83 18 L 77 18 Z" />
-                <circle cx="80" cy="22" r="4" />
-                <path d="M 80 26 L 80 88" stroke="currentColor" strokeWidth="4" strokeLinecap="round" />
-                
-                {/* Cross Beam with ornate arch */}
-                <path d="M 30 38 Q 80 25 130 38" fill="none" stroke="currentColor" strokeWidth="4" strokeLinecap="round" />
-                
-                {/* Left Pan Strings & Dish */}
-                <line x1="30" y1="38" x2="16" y2="65" stroke="currentColor" strokeWidth="1.8" />
-                <line x1="30" y1="38" x2="44" y2="65" stroke="currentColor" strokeWidth="1.8" />
-                <path d="M 12 65 Q 30 78 48 65 Z" />
-
-                {/* Right Pan Strings & Dish */}
-                <line x1="130" y1="38" x2="116" y2="65" stroke="currentColor" strokeWidth="1.8" />
-                <line x1="130" y1="38" x2="144" y2="65" stroke="currentColor" strokeWidth="1.8" />
-                <path d="M 112 65 Q 130 78 148 65 Z" />
-
-                {/* Pedestal Base */}
-                <ellipse cx="80" cy="90" rx="14" ry="4" />
-                <path d="M 72 90 L 88 90 L 85 96 L 75 96 Z" />
-                <ellipse cx="80" cy="96" rx="20" ry="5" />
-
-                {/* 4 Horizontal Speed Lines under base extending to the left (Signature Motif) */}
-                <line x1="5" y1="102" x2="72" y2="102" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
-                <line x1="12" y1="108" x2="78" y2="108" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" />
-                <line x1="22" y1="114" x2="74" y2="114" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-                <line x1="35" y1="120" x2="68" y2="120" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
-              </svg>
+            <div className="relative mb-2 flex items-center justify-center w-full">
+              <img 
+                src="/assets/svl-advocate-logo.png" 
+                alt="Advocate Simhadri Vasantha Lakshmi Logo" 
+                className="w-48 sm:w-52 h-auto object-contain filter drop-shadow-[0_4px_16px_rgba(217,119,6,0.35)] transition-transform duration-300 group-hover:scale-105"
+              />
             </div>
 
-            <p className={`font-cinzel text-xs font-bold tracking-widest uppercase ${
+            <p className={`font-cinzel text-xs font-bold tracking-widest uppercase mt-1 ${
               isExec ? 'text-amber-300' : 'text-[#8c671a]'
             }`}>
               Lex & Justitia

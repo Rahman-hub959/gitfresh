@@ -76,10 +76,10 @@ export default function HeroSection({ onOpenUrgent, isDark }) {
                     />
                   </div>
                   {/* Advocate Bands Seal Badge */}
-                  <div className="absolute -bottom-2 -right-2 w-9 h-9 rounded-full bg-white p-0.5 shadow-lg border border-amber-400">
+                  <div className="absolute -bottom-2.5 -right-2.5 w-10 h-10 rounded-full bg-slate-950 p-1 shadow-xl border-2 border-amber-400">
                     <img 
-                      src="/assets/advocate-bands-seal.png" 
-                      alt="Advocate Bands Insignia" 
+                      src="/assets/svl-advocate-seal.png" 
+                      alt="Advocate Simhadri Vasantha Lakshmi Emblem" 
                       className="w-full h-full object-contain"
                     />
                   </div>
