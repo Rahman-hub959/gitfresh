@@ -127,17 +127,26 @@ export default function LegalOpinionsSection({ isDark }) {
                 >
                   <div>
                     <div className="flex items-center justify-between mb-4">
-                      <span className={`font-mono text-2xl font-black ${
+                      <span className={`font-cinzel text-2xl font-black tracking-wide ${
                         isDark ? 'text-amber-400' : 'text-[#953a2e]'
                       }`}>
                         {item.step}
                       </span>
-                      <span className={`text-[10px] font-display uppercase font-bold tracking-widest px-2 py-0.5 rounded ${
+                      <span className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-display uppercase tracking-widest font-extrabold transition-all border ${
                         isSelected 
-                          ? isDark ? 'bg-amber-500 text-slate-950' : 'bg-[#953a2e] text-white' 
-                          : isDark ? 'bg-slate-800 text-slate-400' : 'bg-[#faf6f4] text-[#64534f]'
+                          ? isDark 
+                            ? 'bg-gradient-to-r from-amber-400 via-amber-300 to-amber-500 text-slate-950 border-amber-200 shadow-md shadow-amber-500/30' 
+                            : 'bg-[#953a2e] text-white border-[#953a2e] shadow-md shadow-[#953a2e]/20' 
+                          : isDark 
+                            ? 'bg-slate-950/80 border-amber-500/30 text-amber-300 hover:border-amber-400/50 shadow-sm' 
+                            : 'bg-white border-[#953a2e]/25 text-[#953a2e] shadow-sm'
                       }`}>
-                        Stage {idx + 1}
+                        <span className={`w-1.5 h-1.5 rounded-full ${
+                          isSelected 
+                            ? isDark ? 'bg-slate-950 animate-pulse' : 'bg-white animate-pulse' 
+                            : isDark ? 'bg-amber-400' : 'bg-[#953a2e]'
+                        }`} />
+                        <span>Stage {idx + 1}</span>
                       </span>
                     </div>
 
